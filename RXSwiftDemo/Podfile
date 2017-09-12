@@ -1,0 +1,38 @@
+# Uncomment the next line to define a global platform for your project
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, ‘8.0’
+use_frameworks!
+# ignore all warnings from all pods
+inhibit_all_warnings!
+
+def pods
+    #Swift
+    pod 'RxSwift',    '~> 3.0'
+    pod 'RxCocoa',    '~> 3.0'
+    pod 'NSObject+Rx' # 为我们提供 rx_disposeBag
+    pod 'Moya/RxSwift'    # 为RxSwift专用提供，对Alamofire进行封装的一个网络请求库
+    pod 'ObjectMapper'    # Json转模型之必备良品
+    pod 'HandyJSON', '~> 1.7.2' 
+    pod 'RxDataSources'   # 帮助我们优雅的使用tableView的数据源方法
+    pod 'Then'            # 提供快速初始化的语法糖
+    pod 'Kingfisher'      # 图片加载库
+    pod 'SnapKit'         # 视图约束库
+    pod 'Reusable'        # 帮助我们优雅的使用自定义cell和view,不再出现Optional
+    pod 'MJRefresh'       # 上拉加载、下拉刷新的库
+    pod 'SVProgressHUD'   # 简单易用的HUD
+    
+end
+
+target 'RXSwiftDemo' do
+    pods
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '3.0'
+        end
+    end
+end
+
